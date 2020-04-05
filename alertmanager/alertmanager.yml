@@ -1,5 +1,5 @@
 global:
-  smtp_smarthost: '<SMTP_SERVER>'
+  smtp_smarthost: '<SMTP_HOST>'
   smtp_from: 'alertmanager@example.com'
   smtp_require_tls: False
 
