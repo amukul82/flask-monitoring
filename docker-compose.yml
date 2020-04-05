@@ -1,0 +1,21 @@
+version: "3"
+services:
+  flask:
+    build: ./flask
+    entrypoint:
+      - gunicorn
+      - -c=conf.py
+      - -w=2
+      - -b=0.0.0.0:5000
+      - --threads=1
+      - --timeout=60
+      - app:app
+    environment:
+      FLASK_DEBUG: 1
+      prometheus_multiproc_dir: /tmp
+    ports: ["5000:5000"]
+    volumes: ["./flask/:/usr/src/app/"]
+  prometheus:
+    image: "docker.repo1.uhc.com/prometheus/prometheus:v2.9.2"
+    ports: ["9090:9090"]
+    volumes: ["./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"]
